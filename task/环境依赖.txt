@@ -1,3 +1,5 @@
-任务支持Windows11原生环境、macOS和Linux。主软件为Node.js20或更高版本，Windows11可直接使用Node.js24LTS。运行时实际承担JSONL逐行容错、URL规范化、crypto摘要、source map关联、策略裁决和CSV导出；PowerShell、Windows终端或系统终端只用于解压和执行npm run process，浏览器控制台或电子表格不能代替这条处理链。
+操作系统：Windows11、macOS或主流64位Linux。
 
-完成版只使用Node.js内置模块，不安装第三方npm包。正式处理读取本地脱敏材料，不连接浏览器、SIEM、告警系统或其它外部服务。执行账户需要读取data、config、source_maps和rules，并能在input_data下创建output。普通开发电脑的CPU与内存即可处理当前上报批次，无需GPU；磁盘只需容纳Node.js、源码映射和报告。入口应设置有限超时，若数分钟内没有返回，应检查JSONL读取和映射查找。不需要业务账号或管理员权限。
+主软件为Node.js20或更高版本，用于逐行读取JSONL、规范化URL、计算crypto摘要、关联source map并导出CSV。代码仅使用Node.js内置模块，无需安装第三方npm包。PowerShell、Windows终端或系统终端可用于解压和执行npm run process。
+
+适合当前上报批次的普通开发电脑CPU与内存即可完成处理，无需GPU。磁盘需容纳Node.js、源码映射和四份报告。执行账户需能读取data、config、source_maps和rules，并能在input_data下创建output。任务在本地完成，不依赖网络服务。入口需设置有限超时，覆盖本题批次处理并避免异常无限等待。

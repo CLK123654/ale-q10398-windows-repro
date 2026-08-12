@@ -23,6 +23,10 @@
     "超时"
   ],
   "license_text_present": false,
+  "environment_scope": "答题者完成业务所需的通用条件",
+  "operating_system_line": "操作系统：Windows11、macOS或主流64位Linux。",
+  "validation_environment_text_present": false,
+  "repository_readme_scrubbed": true,
   "attachments_rebuilt": false,
   "windows_rerun": false,
   "online_write_performed": false,

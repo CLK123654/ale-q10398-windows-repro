@@ -1,5 +1,5 @@
-# CSP安全上报的Node.js分流与源码归属
+# CSP安全上报分流
 
-artifacts目录保存本题四个最终附件，task目录保存候选人可见正文。verification目录中的脚本在GitHub托管Windows环境中从最终附件重建交付物，并记录Node.js版本、两次独立运行、输入变化、错误输入处理和Reference语义比较结果。
+本仓库保存CSP上报分流与源码归属任务。task目录是任务正文，artifacts目录包含输入数据、标准交付和两份工作簿。
 
-手动触发windows-2025工作流即可重新取得该提交对应的运行记录。
+答题入口、软件条件和交付路径以task目录中的Prompt与环境依赖为准。
