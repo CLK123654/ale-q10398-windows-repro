@@ -1,0 +1,15 @@
+{
+  "gate": "candidate_score_answer_leak_scan",
+  "source": "评分表.txt",
+  "rules": [
+    "sample_id_mapping",
+    "complete_result_set",
+    "fixed_count_or_distribution",
+    "ordered_answer_values",
+    "sample_fingerprint",
+    "sample_source_location",
+    "sample_money_or_amount"
+  ],
+  "hits": [],
+  "pass": true
+}

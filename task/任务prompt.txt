@@ -6,4 +6,4 @@
 
 对保留事件，根据release_id和source_file找到source map，再用生成行列定位source_path、源码行列、function_name及symbol。严重级别从severity_by_directive读取，owner_hint采用owner_by_source_prefix的最长匹配，未命中时使用default_owner。按指纹形成告警汇总，保留首次上报和负责人。
 
-在input_data目录运行npm run process，交付output/src/triage_csp_reports.mjs、output/reports/normalized_violations.csv、output/reports/source_lookup.csv、output/reports/suppressed_reports.csv和output/reports/alert_rollup.csv。四张CSV按各自业务主键稳定排序，规范化违例、源码定位和告警汇总之间的指纹及report_id必须对应。
+在input_data目录运行npm run process，交付output/src/triage_csp_reports.mjs、output/reports/normalized_violations.csv、output/reports/source_lookup.csv、output/reports/suppressed_reports.csv和output/reports/alert_rollup.csv。业务CSV按各自主键稳定排序，规范化违例、源码定位和告警汇总之间的指纹及report_id必须对应。

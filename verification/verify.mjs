@@ -147,6 +147,21 @@ assert(JSON.stringify(workbookSheets(path.join(artifactRoot, '关键标准答案
 assert(JSON.stringify(workbookSheets(path.join(artifactRoot, '任务规格转化.xlsx'))) === JSON.stringify(['任务规格转化']), '任务规格Sheet错误');
 const solutionText = parseZip(path.join(artifactRoot, 'reference.zip')).get('output/src/triage_csp_reports.mjs').toString('utf8');
 assert(!/\bR\d{3}\b|web-2026\.07\.28|reference\.zip|https?:\/\/|node:(?:http|https|net|tls)|\bfetch\s*\(/u.test(solutionText), '完成版模块含样本主键、固定release、Reference或外部网络调用');
+const staticReview = JSON.parse(fs.readFileSync(path.join(repoRoot, 'qa', 'static-review.json'), 'utf8'));
+const scoreAnswerLeak = JSON.parse(fs.readFileSync(path.join(repoRoot, 'qa', 'score-answer-leak.json'), 'utf8'));
+const candidateScore = fs.readFileSync(path.join(repoRoot, 'task', '评分表.txt'), 'utf8');
+const scoreLeakPatterns = [
+  /\bR\d{3}\b/gu,
+  /(?:完整|全部)(?:通过|拒绝|压制|保留|结果)(?:集合|清单)/gu,
+  /(?:固定|共计|总计|恰好|正好)\s*\d+\s*(?:行|条|组|个|份)/gu,
+  /(?:依次|分别)为[^。\n]+/gu,
+  /\b[a-f0-9]{12}\b/giu,
+  /(?:source_path|源码路径)[^。\n]*第\s*\d+\s*行/gu,
+  /(?:金额|费用|价格|人民币|美元|元整)/gu,
+];
+const currentScoreLeakHits = scoreLeakPatterns.flatMap((pattern) => [...candidateScore.matchAll(pattern)].map((match) => match[0]));
+assert(staticReview.result === 'PASS' && staticReview.task_spec_column_count === 2, '静态审计或任务规格列数不合格');
+assert(scoreAnswerLeak.pass === true && Array.isArray(scoreAnswerLeak.hits) && scoreAnswerLeak.hits.length === 0 && currentScoreLeakHits.length === 0, `候选人评分表泄露样本答案：${JSON.stringify(currentScoreLeakHits)}`);
 
 const cleanRuns = [];
 for (const label of ['Q10398 第一次 空目录', 'Q10398 第二次 中文 空格目录']) {
@@ -176,7 +191,7 @@ const evidence = {
   schema_version: 1, task_asset_id: 'node_csp_source_triage', result: 'PASS', generated_at_utc: new Date().toISOString(), git_commit_sha: process.env.GITHUB_SHA, workflow_run_id: process.env.GITHUB_RUN_ID,
   runner: { os: process.env.RUNNER_OS, arch: process.env.RUNNER_ARCH, image_os: process.env.ImageOS, image_version: process.env.ImageVersion, node: process.version, powershell_hosted_workflow: true },
   software: { main: 'Node.js', executed: true, node: process.version }, attachment_sha256: attachmentSha256,
-  workbook_checks: { answer_sheet_names: workbookSheets(path.join(artifactRoot, '关键标准答案.xlsx')), specification_sheet_names: ['任务规格转化'] },
+  workbook_checks: { answer_sheet_names: workbookSheets(path.join(artifactRoot, '关键标准答案.xlsx')), specification_sheet_names: ['任务规格转化'], task_spec_column_count: staticReview.task_spec_column_count, candidate_score_answer_leak_hits: currentScoreLeakHits.length },
   platform_audit: { linux_executables: executableScan, linux_executables_executed: false, no_wsl_required: true, no_linux_container_required: true, no_posix_shell_required: true, no_unix_only_api_required: true, cross_platform_paths: true },
   clean_runs: cleanRuns, crlf_input: { file: 'data/csp_reports.jsonl', exit_code: 0, semantic_digest: crlfDigest, reference_match: true },
   positive_mutation: { changed_rule: 'allowed_blocked_hosts新增evil.test', exit_code: 0, r001_reason: r001?.reason, r003_reason: r003?.reason, duplicate_reason_absent: true, normalized_rows: mutatedNormalized.length },
