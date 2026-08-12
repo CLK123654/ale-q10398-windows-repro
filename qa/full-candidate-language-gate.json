@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "task_key": "id:10398",
+  "result": "PASS",
+  "scanned_scope": [
+    "17_fields",
+    "input_zip_all_text_members",
+    "reference_zip_all_text_members",
+    "answer_workbook_all_cells",
+    "spec_workbook_all_cells",
+    "public_repo_candidate_visible_text"
+  ],
+  "scanned_source_count": 36,
+  "natural_language_source_count": 21,
+  "code_command_sql_json_path_exemption_applied": true,
+  "controlled_enum_exemption": {
+    "学科一级分类": "Computing, Data & Mathematical Sciences 计算、数据与数学科学",
+    "reason": "Lark受控单选枚举，必须原样保留，不计入候选自然语言违规。"
+  },
+  "controlled_option_fields_exempted": [
+    "学科一级分类",
+    "学科二级分类",
+    "题目难度",
+    "涉及的专业软件",
+    "包含的操作类型",
+    "是否支持Windows"
+  ],
+  "mixed_boundary_space_count": 0,
+  "double_quote_count": 0,
+  "violations": []
+}

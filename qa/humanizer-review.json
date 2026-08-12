@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "skill": "humanizer-zh",
+  "result": "PASS",
+  "reviewed_scopes": [
+    "任务名称",
+    "任务概要",
+    "任务prompt",
+    "关键动作",
+    "评分表",
+    "环境依赖",
+    "软件步骤",
+    "输入材料中的自然语言",
+    "Reference中的用户可见文字",
+    "关键标准答案工作簿全部自然语言",
+    "任务规格工作簿全部自然语言"
+  ],
+  "scores": {
+    "直接性": 10,
+    "节奏": 9,
+    "信任度": 10,
+    "真实性": 9,
+    "精炼度": 9,
+    "total": 47
+  },
+  "minimum_total": 45,
+  "notes": [
+    "评分保持业务判定语义，只补充总分与按重要性设计的单项分值",
+    "环境依赖按本题实际入口说明运行边界，未加入制题或自动判卷口吻"
+  ],
+  "online_ai_detection_used_as_conclusion": false,
+  "reviewed_artifacts_sha256": {
+    "任务概要.txt": "a8a700a304716d2fb5eae216e287e6a4b84603ac4b2af90da20a9236dd7dae95",
+    "任务prompt.txt": "b6dec542a9cda8e90c47b4405c35085784c4e0642acad353ff5be5b81ae00afd",
+    "关键动作.txt": "9a1430d3ec7e6e373e03d9a48d35324390809936b95753b04c2e6f43439a7fb1",
+    "评分表.txt": "3e166bf8f02cbc9da1b31c73c2ae775d4f1acc4d48c3dd0b5d0e6722b7f40991",
+    "环境依赖.txt": "cecfbca0103339e968c0f553bd7a99a5d8e3b56fa6d2a0268c044472ee8fde61",
+    "相关专业软件的关键步骤.txt": "679d7ee115058c79a2eaf6f006d2d4ef65ff0d4418571231d7d04b82a9304cb4",
+    "任务名称.txt": "222547f34d5daadd1bb2646bd92aeedb8c3dc07d7f964fdf8197349ee02f2d52",
+    "task_fields.json": "e372ec0893b7f5c47edcee4e03edd34c0cac240428c6d396ab04d670a40e2d14",
+    "输入数据包.zip": "24231578a469deef66837c66baf06211556350083ce4c44614d86e3a9eeadc9d",
+    "reference.zip": "8ae49d89562e5f0aa86a5ed3ee494e11326df6972dc41685a026e27324175653",
+    "关键标准答案.xlsx": "c24f17c1bb7bbcf81365643af0c7697ba9a00b54fdd2af2ca02cc2d2a4b24c31",
+    "任务规格转化.xlsx": "2024fa4e1f2b035ba5f9d2a300e74b5484988221a19ae7d20adfac12f8a1b703",
+    "ALE-专家数据作业表.csv": "73a7a9dcab2c5d755e1f78c9a50711f504049c4019af5d77222f99ffbe15b1d7"
+  }
+}

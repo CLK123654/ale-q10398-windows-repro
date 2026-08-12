@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "task_key": "id:10398",
+  "result": "PASS",
+  "change_type": "business_data_label_text_only",
+  "windows_rerun_required": false,
+  "business_semantics_changed": false,
+  "unchanged": [
+    "data",
+    "rules",
+    "code",
+    "attachment_member_structure",
+    "answers",
+    "score_semantics"
+  ],
+  "files": [
+    {
+      "path": "NOTICE.md",
+      "old_sha256": "3619854a51a8f296a78f298813bbbff672f65ee6adb2c2b5da4c88d7873b2228",
+      "new_sha256": "41ee794d561c322a3ac2f3e50f5684cc41e7f66328e11867f30847a0f7ed4a72",
+      "literal_replacement": {
+        "old": "仓库中的CSP上报、发布索引和source map均为虚构的脱敏演练材料，不包含真实账号、流量或生产制品信息。",
+        "new": "本仓库保存本次CSP处置使用的上报、发布索引和source map，账号与流量字段已经脱敏。"
+      }
+    },
+    {
+      "path": "任务规格转化.xlsx::任务规格转化",
+      "old_sha256": "2024fa4e1f2b035ba5f9d2a300e74b5484988221a19ae7d20adfac12f8a1b703",
+      "new_sha256": "12b1e770cc5cd2b958b66279b95474448b8670b033704f4e0d7b8698051b6fce",
+      "literal_replacement": {
+        "old": "原规格中的输入获取、操作链、输入保护、完成条件及数据标签表述",
+        "new": "输入来源：本次CSP浏览器上报、发布制品索引、source map和安全分流策略，账号与流量字段已经脱敏；并按原题改写业务目标、软件步骤、实现边界和交付要求"
+      }
+    }
+  ],
+  "humanizer_review": "PASS",
+  "reason": "仅改正数据标签和规格业务表达；业务数据、规则、代码、附件结构、答案与评分语义均未变化。",
+  "specification_semantic_audit": {
+    "input_source": "PASS：指向本次随包业务材料，身份或业务字段按事实说明已经脱敏。",
+    "business_goal": "PASS：角色、结果消费者和业务用途明确。",
+    "delivery_requirements": "PASS：目标文件与Prompt、评分、答案和Reference闭合。",
+    "software_steps": "PASS：主软件承担核心处理，步骤与输入规则因果相连。",
+    "implementation_boundary": "PASS：只保留完成业务所需的输入保护和外部连接边界。",
+    "two_column_structure": true,
+    "name_based_task_id": "node_csp_source_triage",
+    "visual_review": "PASS"
+  },
+  "language_scan": {
+    "mixed_boundary_space_count": 0,
+    "double_quote_count": 0,
+    "scope": [
+      "17_fields",
+      "input_zip_all_text_members",
+      "reference_zip_all_text_members",
+      "answer_workbook_all_cells",
+      "spec_workbook_all_cells",
+      "public_repo_candidate_visible_text"
+    ]
+  },
+  "controlled_enum_exemption": {
+    "field": "学科一级分类",
+    "value": "Computing, Data & Mathematical Sciences 计算、数据与数学科学",
+    "reason": "Lark受控单选枚举必须原样保留，不计入候选自然语言违规。"
+  }
+}
