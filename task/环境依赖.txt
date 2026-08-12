@@ -1,0 +1,5 @@
+支持Windows11、macOS和Linux。主软件为Node.js20或更高版本，Windows11建议使用Node.js24。Node.js实际承担JSONL逐行容错、URL规范化、crypto摘要、source map关联、策略裁决和CSV导出；浏览器控制台或电子表格不能替代这条处理链。
+
+辅助工具为PowerShell、Windows终端或系统终端，用于解压材料和运行npm run process。完成版只使用Node.js内置模块，不安装第三方npm包。正式处理读取本地脱敏材料，不连接浏览器、SIEM、告警系统或其它外部服务。Node.js按其开源许可使用。
+
+建议准备单核CPU、1GB内存和100MB可写磁盘。执行账户需要读取input_data/data、input_data/config、input_data/source_maps和input_data/rules，并可写入input_data/output。单次入口超时为30秒。业务风险集中在坏JSON中断批次、查询串进入指纹、压制次序被写死、重复事件覆盖首次上报、发布版本与map错配以及负责人前缀选成较短匹配。

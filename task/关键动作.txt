@@ -1,0 +1,7 @@
+读取CSP上报、发布制品索引、source map和分流策略，确认时间窗口、压制次序、指纹配置、严重级别与负责人映射
+逐行解析JSONL并保留物理行号，使损坏记录进入压制表且不影响后续事件
+规范化document_uri和blocked_uri，按suppression_reason_order裁决每条合法事件的首个压制原因
+依照duplicate_fingerprint_fields和fingerprint_digest生成指纹，保留首个有效enforce事件
+根据release_id、source_file及生成行列反查源码路径、源码坐标、函数与symbol
+按severity_by_directive赋级，并用最长源码前缀选择owner_hint
+按指纹汇总首次上报与负责人，导出规范化违例、源码定位、压制记录和告警汇总

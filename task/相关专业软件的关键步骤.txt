@@ -1,0 +1,8 @@
+1. 读取csp_reports.jsonl、csp_triage_policy.json和release_artifacts.json，核对上报字段、策略数组及映射路径。
+2. 用Node.js按物理行解析JSONL，记录line_no，并将解析失败限制在当前行。
+3. 通过URL规范化document_uri与blocked_uri，生成document_path和blocked_host_or_token。
+4. 依次检查时间窗口、发布版本、disposition、directive、允许域名和重复指纹，选择首个压制原因。
+5. 按duplicate_fingerprint_fields组装字段值，再使用fingerprint_digest生成固定长度摘要。
+6. 沿release_artifacts加载source map，以release_id、source_file、generated_line和generated_column定位源码信息。
+7. 读取severity_by_directive赋级，按owner_by_source_prefix最长匹配选择负责人。
+8. 写出四张CSV，按report_id、line_no或first_report_id排序并核对跨表关联。

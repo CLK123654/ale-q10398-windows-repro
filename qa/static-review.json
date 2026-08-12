@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "result": "PASS",
+  "scanned_sources": 226,
+  "violations": [],
+  "answer_sheets": [
+    "交付物答案清单",
+    "固定字段答案",
+    "固定集合答案",
+    "固定数值答案",
+    "允许变体答案"
+  ],
+  "specification_sheets": [
+    "任务规格转化"
+  ],
+  "task_spec_row_count": 19,
+  "task_spec_column_count": 2,
+  "task_asset_id": "node_csp_source_triage",
+  "task_asset_id_valid": true,
+  "forbidden_spec_labels": [],
+  "declared_delivery_paths": [
+    "output/reports/alert_rollup.csv",
+    "output/reports/normalized_violations.csv",
+    "output/reports/source_lookup.csv",
+    "output/reports/suppressed_reports.csv",
+    "output/src/triage_csp_reports.mjs"
+  ],
+  "reference_paths": [
+    "output/reports/alert_rollup.csv",
+    "output/reports/normalized_violations.csv",
+    "output/reports/source_lookup.csv",
+    "output/reports/suppressed_reports.csv",
+    "output/src/triage_csp_reports.mjs"
+  ],
+  "business_inputs": [
+    "input_data/data/csp_reports.jsonl",
+    "input_data/config/release_artifacts.json",
+    "input_data/source_maps",
+    "input_data/rules/csp_triage_policy.json"
+  ],
+  "business_inputs_present": true,
+  "humanizer_score": 47,
+  "online_ai_detector_used_as_conclusion": false
+}

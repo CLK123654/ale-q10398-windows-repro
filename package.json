@@ -1,0 +1,12 @@
+{
+  "name": "node-csp-source-triage-windows-repro",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "verify": "node verification/verify.mjs"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

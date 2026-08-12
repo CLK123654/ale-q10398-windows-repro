@@ -1,0 +1,9 @@
+前端安全值班每天接收浏览器CSP上报，当前导出中混有旧发布、report-only事件、已允许域名、重复记录和损坏JSON。值班人员需要一份可直接分派的告警清单，也要保留压制原因，方便解释为什么某条上报没有进入处置队列。
+
+输入数据包中的data/csp_reports.jsonl保存逐行上报，config/release_artifacts.json关联发布版本和压缩文件，source_maps目录提供源码映射，rules/csp_triage_policy.json规定处理窗口、压制顺序、指纹算法、严重级别及负责人前缀。README.md说明入口，starter/triage_csp_reports.mjs只提供起始位置。
+
+请在output/src/triage_csp_reports.mjs完成Node.js处理。JSONL按物理行读取，空行跳过，无法解析的非空行写入suppressed_reports.csv后继续。document_uri只保留pathname；blocked_uri能解析为URL时提取host，否则保留原始token。按照suppression_reason_order选择首个压制原因，只有未被压制的enforce事件参与去重。指纹字段顺序、摘要算法、分隔符和长度均取自策略，重复项的detail指向最先保留的report_id。
+
+对保留事件，根据release_id和source_file找到source map，再用生成行列定位source_path、源码行列、function_name及symbol。严重级别从severity_by_directive读取，owner_hint采用owner_by_source_prefix的最长匹配，未命中时使用default_owner。按指纹形成告警汇总，保留首次上报和负责人。
+
+在input_data目录运行npm run process，交付output/src/triage_csp_reports.mjs、output/reports/normalized_violations.csv、output/reports/source_lookup.csv、output/reports/suppressed_reports.csv和output/reports/alert_rollup.csv。四张CSV按各自业务主键稳定排序，规范化违例、源码定位和告警汇总之间的指纹及report_id必须对应。
