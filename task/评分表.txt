@@ -1,6 +1,6 @@
 总分：100分
 
-检查项：交付文件与Node.js入口
+1. 交付文件与Node.js入口
 分值：12分
 标准答案或判定规则：Prompt声明的交付路径均存在，triage_csp_reports.mjs可由Node.js执行，业务CSV可解析且表头完整
 关键字段或路径：output/src/triage_csp_reports.mjs；output/reports/normalized_violations.csv；output/reports/source_lookup.csv；output/reports/suppressed_reports.csv；output/reports/alert_rollup.csv
@@ -12,7 +12,7 @@
 优先级：Gate项
 所属层级：L8运行验证或可执行行为层
 
-检查项：逐行容错与压制去向
+2. 逐行容错与压制去向
 分值：12分
 标准答案或判定规则：每条非空物理行进入normalized_violations.csv或suppressed_reports.csv；损坏JSON记录line_no且reason为malformed_json，后续合法上报继续处理
 关键字段或路径：data/csp_reports.jsonl；suppressed_reports.csv的line_no、report_id、reason、detail；normalized_violations.csv的report_id
@@ -24,7 +24,7 @@
 优先级：Gate项
 所属层级：L4数据清洗与质量控制层
 
-检查项：策略压制次序
+3. 策略压制次序
 分值：15分
 标准答案或判定规则：对每条上报按suppression_reason_order依次评估时间窗口、发布版本、disposition、directive、允许域名和重复指纹，取首个命中原因
 关键字段或路径：csp_triage_policy.json的report_start_utc、report_end_utc、ignored_directives、allowed_blocked_hosts、suppression_reason_order；release_artifacts.json；suppressed_reports.csv
@@ -36,7 +36,7 @@
 优先级：高权重项
 所属层级：L6领域计算与专业规则层
 
-检查项：URL规范化与动态指纹
+4. URL规范化与动态指纹
 分值：17分
 标准答案或判定规则：未被业务条件压制的enforce事件先规范化URL，再按策略指定的字段次序、分隔符、摘要算法和长度计算指纹；重复项指向相同指纹中最早保留的report_id
 关键字段或路径：normalized_violations.csv的report_id、fingerprint、document_path、blocked_host_or_token；suppressed_reports.csv；duplicate_fingerprint_fields；fingerprint_digest
@@ -48,7 +48,7 @@
 优先级：高权重项
 所属层级：L5多源关联与字段一致性层
 
-检查项：Source map定位
+5. Source map定位
 分值：20分
 标准答案或判定规则：每个保留事件按release_id、source_file、generated_line和generated_column命中映射，source_path、源码行列、function_name与symbol均来自对应map
 关键字段或路径：release_artifacts.json；source_maps目录；source_lookup.csv全部字段
@@ -60,7 +60,7 @@
 优先级：高权重项
 所属层级：L5多源关联与字段一致性层
 
-检查项：严重级别、负责人和告警汇总
+6. 严重级别、负责人和告警汇总
 分值：16分
 标准答案或判定规则：severity取severity_by_directive，owner_hint按owner_by_source_prefix最长匹配；alert_rollup每个保留指纹一行，first_report_id和report_count与规范化违例一致
 关键字段或路径：normalized_violations.csv；alert_rollup.csv；severity_by_directive；owner_by_source_prefix；default_owner
@@ -72,7 +72,7 @@
 优先级：高权重项
 所属层级：L9跨产物一致性与可追溯层
 
-检查项：业务报告的主键与排序
+7. 业务报告的主键与排序
 分值：8分
 标准答案或判定规则：normalized_violations.csv与source_lookup.csv按report_id升序，suppressed_reports.csv按line_no升序，alert_rollup.csv按first_report_id升序；跨表report_id、fingerprint、source_path和owner_hint可关联
 关键字段或路径：reports目录业务CSV的表头与业务主键
